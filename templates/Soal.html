@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://atugatran.github.io/FontAwesome6Pro/css/all.min.css">
+    <style>
+        * { font-family: 'Poppins'; }
+    </style>
+</head>
+<body>
+    <div class="flex w-full h-screen items-center justify-center bg-[#E1F7FD]">
+        <div class="flex flex-row w-[50vw] h-[70vh] p-3 bg-white rounded-2xl">
+            <div class="flex bg-[#E1F7FD] w-[50%] rounded-xl items-center justify-center">
+                <p class="text-xl text-[#0687A9] font-semibold">{{ Kuis.Soal }}</p>
+            </div>
+            <div class="w-[50%]">
+                <form method="post" action="/soal" class="flex flex-col w-full h-full justify-center items-center space-y-10">
+                    {% for Jawaban in Kuis.Jawaban %}
+                    <div clicked="false" onclick="handleClick(this)" class="jawaban flex flex-row w-[70%] px-5 py-2 rounded-lg border-2 border-[#0687A9] space-x-3 items-center">
+                        <input type="checkbox" name="checkbox" value="{{ Jawaban }}" class="hidden">
+                        <i class="fa-regular fa-circle"></i>
+                        <p class="font-medium">{{ Jawaban }}</p>
+                    </div>
+                    {% endfor %}
+                    <button type="submit" class="px-10 py-2 rounded-full bg-blue-300 text-white font-medium duration-300 hover:bg-blue-400"> Lanjut </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleClick(element) {
+            const jawabanElements = document.querySelectorAll(".jawaban");
+            jawabanElements.forEach(jawaban => {
+                jawaban.querySelector('i').setAttribute('class', 'fa-regular fa-circle')
+                jawaban.querySelector('input').checked = false
+            })
+            element.querySelector('i').setAttribute('class', 'fa-regular fa-circle-dot text-[#0687A9]')
+            element.querySelector('input').checked = true
+        }
+    </script>
+</body>
+</html>
