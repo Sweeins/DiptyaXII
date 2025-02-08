@@ -52,6 +52,7 @@ def Mulai():
     Randoms = []
     Skor.clear()
     Skor.append(0)
+    StepSoal.clear()
     StepSoal.append(0)
     for X in range(JumlahSoal):
         Randoms.append(PilihSoal(Randoms))
